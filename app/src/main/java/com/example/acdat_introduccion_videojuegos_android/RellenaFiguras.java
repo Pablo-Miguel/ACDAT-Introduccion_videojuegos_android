@@ -42,9 +42,10 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
         int id = 0;
 
         figuras = new ArrayList<Figura>();
-        figuras.add(new Circulo(id++, 250, 300, Color.BLACK,100));
-        figuras.add(new Rectangulo(id++, 200, 500, Color.RED, Paint.Style.STROKE,200, 200));
-        figuras.add(new Rectangulo(id++, 500, 500, Color.RED, Paint.Style.FILL,200, 200));
+        figuras.add(new Circulo(id++, 500, 300, Color.MAGENTA, Paint.Style.STROKE,100));
+        figuras.add(new Rectangulo(id++, 500, 500, Color.RED, Paint.Style.STROKE,200, 200));
+        figuras.add(new Circulo(id++, 250, 300, Color.MAGENTA, Paint.Style.FILL,100));
+        figuras.add(new Rectangulo(id++, 200, 500, Color.RED, Paint.Style.FILL,200, 200));
 
         threadDraw = new ThreadDraw(this);
         threadDraw.setRunning(true);
@@ -111,11 +112,11 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
                             boolean estado = figuras.get(figuraActiva).isHover(figura);
                             if(estado){
                                 if(figura.getPaint().getStyle() == Paint.Style.STROKE){
-                                    figura.setPos_X(10000);
-                                    figura.setPos_Y(10000);
+                                    figura.setPos_X(100000);
+                                    figura.setPos_Y(100000);
                                 } else {
-                                    figuras.get(figuraActiva).setPos_X(10000);
-                                    figuras.get(figuraActiva).setPos_Y(10000);
+                                    figuras.get(figuraActiva).setPos_X(100000);
+                                    figuras.get(figuraActiva).setPos_Y(100000);
                                     figuraActiva = figura.getId();
                                 }
                             }

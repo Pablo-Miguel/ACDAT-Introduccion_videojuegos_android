@@ -1,7 +1,9 @@
 package com.example.acdat_introduccion_videojuegos_android.modelo;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 
 import java.util.Objects;
 
