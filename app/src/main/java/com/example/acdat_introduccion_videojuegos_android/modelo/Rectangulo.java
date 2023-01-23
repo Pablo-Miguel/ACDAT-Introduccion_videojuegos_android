@@ -13,8 +13,8 @@ public class Rectangulo extends Figura{
         this.altura = altura;
     }
 
-    public Rectangulo(int id, float pos_X, float pos_Y, int color, Paint.Style style, int base, int altura) {
-        super(id, pos_X, pos_Y, color, style);
+    public Rectangulo(int id, float pos_X, float pos_Y, int color, Paint.Style style, int base, int altura, boolean mover) {
+        super(id, pos_X, pos_Y, color, style, mover);
         this.base = base;
         this.altura = altura;
     }

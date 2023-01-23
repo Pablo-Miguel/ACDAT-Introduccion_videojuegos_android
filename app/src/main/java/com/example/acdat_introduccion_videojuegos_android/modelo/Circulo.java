@@ -13,8 +13,8 @@ public class Circulo extends Figura {
         this.radio = radio;
     }
 
-    public Circulo(int id, float pos_X, float pos_Y, int color, Paint.Style style, int radio) {
-        super(id, pos_X, pos_Y, color, style);
+    public Circulo(int id, float pos_X, float pos_Y, int color, Paint.Style style, int radio, boolean mover) {
+        super(id, pos_X, pos_Y, color, style, mover);
         this.radio = radio;
     }
 

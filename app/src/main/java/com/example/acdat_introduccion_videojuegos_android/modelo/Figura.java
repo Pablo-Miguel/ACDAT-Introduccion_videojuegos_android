@@ -11,6 +11,7 @@ public abstract class Figura {
     private int id;
     private float pos_X, pos_Y;
     private Paint paint;
+    private boolean mover;
 
     public Figura(int id, float pos_X, float pos_Y, int color) {
         this.id = id;
@@ -21,7 +22,7 @@ public abstract class Figura {
         this.paint.setColor(color);
     }
 
-    public Figura(int id, float pos_X, float pos_Y, int color, Paint.Style style) {
+    public Figura(int id, float pos_X, float pos_Y, int color, Paint.Style style, boolean mover) {
         this.id = id;
         this.pos_X = pos_X;
         this.pos_Y = pos_Y;
@@ -29,6 +30,8 @@ public abstract class Figura {
         this.paint.setAntiAlias(true);
         this.paint.setStyle(style);
         this.paint.setColor(color);
+        this.paint.setStrokeWidth(10);
+        this.mover = mover;
     }
 
     public Figura(int id, float pos_X, float pos_Y) {
@@ -79,6 +82,14 @@ public abstract class Figura {
 
     public void setPaint(Paint paint) {
         this.paint = paint;
+    }
+
+    public boolean isMover() {
+        return mover;
+    }
+
+    public void setMover(boolean mover) {
+        this.mover = mover;
     }
 
     @Override
