@@ -15,16 +15,23 @@ import com.example.acdat_introduccion_videojuegos_android.modelo.Circulo;
 import com.example.acdat_introduccion_videojuegos_android.modelo.Figura;
 import com.example.acdat_introduccion_videojuegos_android.modelo.Imagen;
 import com.example.acdat_introduccion_videojuegos_android.modelo.Rectangulo;
+import com.example.acdat_introduccion_videojuegos_android.modelo.menu.ButtonMenu;
+import com.example.acdat_introduccion_videojuegos_android.modelo.menu.Menu;
+import com.example.acdat_introduccion_videojuegos_android.modelo.menu.MenuBackground;
+import com.example.acdat_introduccion_videojuegos_android.modelo.menu.TextMenu;
 import com.example.acdat_introduccion_videojuegos_android.threads.ThreadDraw;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callback {
-
+    Random rnd = new Random();
     private ThreadDraw threadDraw;
     private ArrayList<Figura> figuras;
+    private ArrayList<Menu> figuras_menu;
     private int figuraActiva;
     private int iniX, iniY;
+    private int id;
 
     public RellenaFiguras(Context context) {
         super(context);
@@ -39,7 +46,7 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
-        int id = 0;
+        id = 0;
 
         figuras = new ArrayList<Figura>();
         figuras.add(new Circulo(id++, getWidth() - 500, 300,
@@ -49,8 +56,11 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
         figuras.add(new Circulo(id++, 250, 300, Color.MAGENTA, Paint.Style.FILL,100, true));
         figuras.add(new Rectangulo(id++, 200, 500, Color.RED, Paint.Style.FILL,200, 200, true));
 
-        figuras.add(new Rectangulo(id++, 0, getHeight() - 300, Color.GREEN, Paint.Style.FILL,
-                getWidth(), 300, false));
+        figuras_menu = new ArrayList<Menu>();
+        figuras_menu.add(new MenuBackground(0, 0, getHeight() - 300, Color.GREEN, getWidth(), 300));
+        figuras_menu.add(new ButtonMenu(0, 100, getHeight() - 250, Color.TRANSPARENT, getResources(),
+                R.drawable.add_btn, 200, 200));
+        figuras_menu.add(new TextMenu(0, getWidth() - 500, getHeight() - 250, Color.BLACK, "Puntuación: 0"));
 
         threadDraw = new ThreadDraw(this);
         threadDraw.setRunning(true);
@@ -81,10 +91,12 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
 
         canvas.drawColor(Color.WHITE);
 
-
-
         for (Figura figura: figuras) {
             figura.onDraw(canvas);
+        }
+
+        for (Menu m: figuras_menu) {
+            m.onDraw(canvas);
         }
 
     }
@@ -97,6 +109,29 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
+                if (figuras_menu.get(1).isTouched(x, y)) {
+                    MenuBackground menuBackground = (MenuBackground) figuras_menu.get(0);
+                    if(rnd.nextBoolean()) figuras.add(
+                            new Circulo(
+                                    id++,
+                                    rnd.nextInt(getWidth() - 200),
+                                    rnd.nextInt(getHeight() - menuBackground.getAltura() - 200),
+                                    Color.MAGENTA,
+                                    Paint.Style.FILL,
+                                    100,
+                                    true));
+                    else figuras.add(
+                            new Rectangulo(
+                                    id++,
+                                    rnd.nextInt(getWidth() - 200),
+                                    rnd.nextInt(getHeight() - menuBackground.getAltura() - 200),
+                                    Color.RED,
+                                    Paint.Style.FILL,
+                                    200,
+                                    200,
+                                    true));
+                }
+
                 for (Figura f : figuras) {
                     if (f.isTouched(x, y) && f.isMover()) {
                         figuraActiva = f.getId();
@@ -119,9 +154,8 @@ public class RellenaFiguras extends SurfaceView implements SurfaceHolder.Callbac
                             boolean estado = figuras.get(figuraActiva).isHover(figura);
                             if(estado){
                                 if(figura.getPaint().getStyle() == Paint.Style.STROKE){
-                                    figuras.get(figuraActiva).setPos_X(100000);
-                                    figuras.get(figuraActiva).setPos_Y(100000);
-                                    figuraActiva = -1;
+                                    figuras.get(figuraActiva).setPos_X(-100000);
+                                    figuras.get(figuraActiva).setPos_Y(-100000);
                                 }
                             }
                         }
