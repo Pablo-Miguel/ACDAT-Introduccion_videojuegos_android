@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(new MoverFiguras(MainActivity.this));
 
         //Ejemplo:3
-        setContentView(new RellenaFiguras(MainActivity.this));
+        //setContentView(new RellenaFiguras(MainActivity.this));
 
+        //Ejemplo:4
+        setContentView(new GameView(MainActivity.this));
     }
 }
