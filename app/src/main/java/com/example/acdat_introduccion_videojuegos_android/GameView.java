@@ -35,8 +35,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.fnaf_v2);
-        bmp = bmp.createScaledBitmap(bmp, 395, 600, true);
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.chrono);
+        bmp = bmp.createScaledBitmap(bmp, 500, 656, true);
         sprite = new Sprite(this, this.bmp);
 
         gameLoopThread = new GameLoopThread(this);
