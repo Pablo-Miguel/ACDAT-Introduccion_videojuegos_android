@@ -35,7 +35,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
-        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.chrono);
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.caballero);
         bmp = bmp.createScaledBitmap(bmp, 500, 656, true);
         sprite = new Sprite(this, this.bmp);
 
