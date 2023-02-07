@@ -12,7 +12,8 @@ import java.util.Random;
 
 public class Sprite {
     private static final int BMP_ROWS = 4;
-    private static final int BMP_COLUMNS = 4;
+    private static final int BMP_COLUMNS = 3;
+    private static final int MAX_SPEED = 20;
     private int x = 0;
     private int y = 0;
     private int xSpeed, ySpeed;
@@ -28,8 +29,9 @@ public class Sprite {
         this.bmp = bmp;
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
-        xSpeed = 20;
-        ySpeed = 20;
+        Random rnd = new Random();
+        xSpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
+        ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
     }
 
     private int getAnimationRow() {
@@ -62,5 +64,11 @@ public class Sprite {
         canvas.drawBitmap(bmp, src, dst, null);
     }
 
+    public boolean isTouched(float x2, float y2) {
+        if(x2 > x && x2 < x + width && y2 > y && y2 < y + height){
+            return true;
+        }
+        return false;
+    }
 
 }
